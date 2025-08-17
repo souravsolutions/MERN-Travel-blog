@@ -1,0 +1,42 @@
+import axios from "axios";
+
+class ApiClient {
+  constructor() {
+    this.client = axios.create({
+      baseURL: import.meta.env.VITE_BASE_URL,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      timeout: 10000,
+      withCredentials: true,
+    });
+  }
+
+  async signUp(username, email, password) {
+    return this.client.post("/auth/signup", { username, email, password });
+  }
+
+  async login(email, password) {
+    return this.client.post("/auth/login", { email, password });
+  }
+
+  async getCurrentUser() {
+    return this.client.get("/auth/me");
+  }
+
+  async getUserStories() {
+    return this.client.get("/stories/allstory");
+  }
+
+  async getStoryById(id) {
+    return this.client.get(`/stories/allstory/${id}`);
+  }
+
+  async likes(id) {
+    return this.client.patch(`/stories/allstory/${id}/like`);
+  }
+  
+}
+
+export default new ApiClient();
