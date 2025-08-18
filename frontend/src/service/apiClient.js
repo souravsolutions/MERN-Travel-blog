@@ -13,8 +13,8 @@ class ApiClient {
     });
   }
 
-  async signUp(username, email, password) {
-    return this.client.post("/auth/signup", { username, email, password });
+  async signUp(fullName, email, password) {
+    return this.client.post("/auth/signup", { fullName, email, password });
   }
 
   async login(email, password) {

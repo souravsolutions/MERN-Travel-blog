@@ -4,9 +4,10 @@ import { Heart } from "lucide-react";
 import useAuthStore from "../context/AuthContext";
 
 function Body() {
-  const stories = useAuthStore((state) => state.stories);
-  const likes = useAuthStore((state) => state.likes);
-  const user = useAuthStore((state) => state.user);
+  // const stories = useAuthStore((state) => state.stories);
+  // const likes = useAuthStore((state) => state.likes);
+  // const user = useAuthStore((state) => state.user);
+  const { stories, likes, user } = useAuthStore();
 
   const [updating, setUpdating] = useState(null);
 

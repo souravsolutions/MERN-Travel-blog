@@ -24,7 +24,7 @@ function Navbar() {
             Dashboard
           </a>
           <a
-            href='/stories'
+            href='/YourStory'
             className='text-slate-600 hover:text-blue-600 transition-colors duration-200'
           >
             My Stories
@@ -81,7 +81,7 @@ function Navbar() {
           Dashboard
         </a>
         <a
-          href='/stories'
+          href='/YourStory'
           className='text-slate-600 hover:text-blue-600 transition-colors duration-200'
         >
           My Stories

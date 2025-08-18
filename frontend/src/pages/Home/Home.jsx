@@ -4,8 +4,8 @@ import Body from "../../components/Body.jsx";
 import useAuthStore from "../../context/AuthContext";
 
 function Home() {
-  const {isLoading } = useAuthStore();
- 
+  const { isLoading } = useAuthStore();
+
   if (isLoading) {
     return (
       <div className='flex items-center justify-center h-screen bg-gray-100'>
@@ -19,10 +19,10 @@ function Home() {
 
   return (
     <div>
-        <Navbar/>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Body/>
-        </div>
+      <Navbar />
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+        <Body />
+      </div>
     </div>
   );
 }
