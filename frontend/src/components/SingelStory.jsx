@@ -9,7 +9,7 @@ function SingleStory() {
   const { id } = useParams();
   const [updating, setUpdating] = useState(null);
 
-  const { user, likes, fetchStoryById, currentStory, fetchUser } = useAuthStore();
+  const { user, likes, fetchStoryById, currentStory } = useAuthStore();
 
   useEffect(() => {
     fetchStoryById(id);

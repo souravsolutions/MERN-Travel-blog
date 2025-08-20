@@ -4,9 +4,6 @@ import { Heart } from "lucide-react";
 import useAuthStore from "../context/AuthContext";
 
 function Body() {
-  // const stories = useAuthStore((state) => state.stories);
-  // const likes = useAuthStore((state) => state.likes);
-  // const user = useAuthStore((state) => state.user);
   const { stories, likes, user } = useAuthStore();
 
   const [updating, setUpdating] = useState(null);
@@ -27,7 +24,7 @@ function Body() {
       {stories.map((story) => (
         <div
           key={story._id}
-          className='bg-white/80 backdrop-blur-lg rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 mb-6 sm:mb-8 overflow-hidden group'
+          className='bg-white/80 backdrop-blur-lg shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 mb-6 sm:mb-8 overflow-hidden group'
         >
           <div className='flex flex-col md:flex-row'>
             <div className='relative md:w-2/5 lg:w-2/5 aspect-[4/3] overflow-hidden'>

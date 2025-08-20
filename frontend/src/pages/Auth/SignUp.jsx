@@ -6,6 +6,7 @@ import { FaGoogle } from "react-icons/fa";
 import ApiClient from "../../service/apiClient.js";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../context/AuthContext";
+import { toast } from "sonner";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -28,8 +29,10 @@ function SignUp() {
 
       navigate("/dashboard");
       window.location.reload();
+      toast.success("welcome to Travel Blogger!")
     } catch (err) {
       console.error("Login error:", err);
+      toast.error("Signup failed. Please check your details.");
     }
   };
 

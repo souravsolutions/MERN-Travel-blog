@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
@@ -16,10 +16,10 @@ function App() {
     if (!user) {
       fetchUser();
     }
-  }, []);
+  },[]);
 
   return (
-    <div>
+    <>
       <Router>
         <Routes>
           <Route path='/' element={<Front />} />
@@ -31,7 +31,7 @@ function App() {
         </Routes>
         <Toaster richColors position='top-right' />
       </Router>
-    </div>
+    </>
   );
 }
 

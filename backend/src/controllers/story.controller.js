@@ -2,7 +2,7 @@ import { TravelStory } from "../models/travelStory.model.js";
 
 const addStory = async (req, res) => {
   try {
-    const { title, story, visitedLocation, visitedDate, isFevourite, tags, } =
+    const { title, story, visitedLocation, visitedDate, isFevourite, tags } =
       req.body;
 
     const userId = req.user.id;
@@ -105,11 +105,15 @@ const likeStory = async (req, res) => {
 
     const story = await TravelStory.findById(id).populate("userId", "fullName");
     if (!story) {
-      return res.status(404).json({ success: false, message: "Story not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Story not found" });
     }
 
     if (story.likes.includes(userId)) {
-      story.likes = story.likes.filter((uid) => uid.toString() !== userId.toString());
+      story.likes = story.likes.filter(
+        (uid) => uid.toString() !== userId.toString()
+      );
     } else {
       story.likes.push(userId);
     }
@@ -121,7 +125,6 @@ const likeStory = async (req, res) => {
       message: "Story like toggled successfully",
       data: story,
     });
-
   } catch (error) {
     console.error("Error toggling like:", error);
     return res.status(500).json({
@@ -132,4 +135,51 @@ const likeStory = async (req, res) => {
   }
 };
 
-export { addStory, allstory, getSingleStory, likeStory };
+const userStory = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const stories = await TravelStory.find({ userId })
+      .populate("userId", "fullName username")
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      message:
+        stories.length > 0
+          ? "User's travel stories fetched successfully."
+          : "No travel stories found for this user.",
+      data: stories,
+    });
+  } catch (error) {
+    console.error("Error fetching user stories:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching user stories.",
+      error: error.message,
+    });
+  }
+};
+
+export const deleteStory = async (req, res) => {
+  try {
+    const story = await TravelStory.findById(req.params.id);
+
+    if (!story) {
+      return res.status(404).json({ message: "Story not found" });
+    }
+
+    if (story.imagePublicId) {
+      await cloudinary.uploader.destroy(story.imagePublicId);
+    }
+
+    await story.deleteOne();
+
+    res.json({ success: true, message: "Story deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export { addStory, allstory, getSingleStory, likeStory, userStory, deleteStory };

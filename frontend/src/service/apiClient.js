@@ -25,7 +25,7 @@ class ApiClient {
     return this.client.get("/auth/me");
   }
 
-  async getUserStories() {
+  async getAllStories() {
     return this.client.get("/stories/allstory");
   }
 
@@ -37,6 +37,9 @@ class ApiClient {
     return this.client.patch(`/stories/allstory/${id}/like`);
   }
   
+  async getUserStories() {
+    return this.client.get("/stories/userstory");
+  }
 }
 
 export default new ApiClient();

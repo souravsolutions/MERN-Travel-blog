@@ -6,6 +6,11 @@ const useAuthStore = create((set) => ({
   stories: [],
   currentStory: null,
   isLoading: true,
+  userStories: [],
+  hasFetched: false,
+
+  // login: (userData) => set({ user: userData }),
+  // allStory: (stories) => set({ stories }),
 
   fetchUser: async () => {
     try {
@@ -13,7 +18,7 @@ const useAuthStore = create((set) => ({
       set({ user: res.data.data || null });
 
       if (res.data.data) {
-        const storiesRes = await ApiClient.getUserStories();
+        const storiesRes = await ApiClient.getAllStories();
         set({ stories: storiesRes.data.data || [] });
       }
     } catch (err) {
@@ -22,9 +27,6 @@ const useAuthStore = create((set) => ({
       set({ isLoading: false });
     }
   },
-
-  login: (userData) => set({ user: userData }),
-  allStory: (story) => set({ stories: story }),
 
   fetchStoryById: async (id) => {
     try {
@@ -56,7 +58,22 @@ const useAuthStore = create((set) => ({
       console.error("Error toggling like:", err);
     }
   },
-  
+
+  fetchUserStories: async () => {
+    try {
+      const res = await ApiClient.getUserStories();
+      set({ isLoading: true, hasFetched: false });
+
+      if (res.data.data) {
+        set({ userStories: res.data.data || [] });
+      }
+    } catch (err) {
+      console.error("Error fetching user stories:", err);
+      set({ userStories: [] });
+    } finally {
+      set({ isLoading: false ,hasFetched: true});
+    }
+  },
 }));
 
 export default useAuthStore;

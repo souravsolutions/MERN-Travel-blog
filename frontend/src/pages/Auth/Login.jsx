@@ -6,29 +6,23 @@ import { FaGoogle } from "react-icons/fa";
 import ApiClient from "../../service/apiClient.js";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../context/AuthContext";
+import { toast } from "sonner";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const login = useAuthStore((state) => state.login);
-  const allStory = useAuthStore((state) => state.allStory);
-
   const loginHandeler = async (e) => {
     e.preventDefault();
     try {
       const res = await ApiClient.login(email, password);
-      const user = res.data.user;
-      login(user);
-
-      const storiesRes = await ApiClient.getUserStories();
-      allStory(storiesRes.data.data);
       
       navigate("/dashboard");
-      window.location.reload();
+      toast.success("Login successful!");
     } catch (err) {
       console.error("Login error:", err);
+      toast.error("Login failed. Please check your credentials.");
     }
   };
 
