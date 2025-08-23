@@ -1,11 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAuthStore from "../context/AuthContext";
 import Navbar from "./Navbar";
-import { Heart } from "lucide-react";
 import { BookOpen } from "lucide-react";
+import { Heart, Edit, Trash2, Plus } from "lucide-react";
+import Loading from "./Loading";
+import ApiClient from "../service/apiClient";
+import { toast } from "sonner";
+import ConfirmDelete from "./ConfirmDelete";
+import TravelUploadComponent from "./TravelUploadComponent";
 
 function UserStory() {
-  const { userStories, fetchUserStories, isLoading, hasFetched } = useAuthStore();
+  const { userStories, fetchUserStories, isLoading, hasFetched } =
+    useAuthStore();
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const [editingStory, setEditingStory] = useState(null);
+
+  const [openUpload, setOpenUpload] = useState(false);
 
   useEffect(() => {
     if (hasFetched === false) {
@@ -14,8 +26,25 @@ function UserStory() {
   }, [userStories]);
 
   if (isLoading) {
-    return <p>Loading user stories...</p>;
+    return <Loading />;
   }
+
+  const handeldelete = async () => {
+    try {
+      const response = await ApiClient.deleteUserStory(deleteId);
+
+      if (response) {
+        fetchUserStories();
+        toast.success("Story deleted successfully!");
+      }
+    } catch (error) {
+      console.error("Error deleting story:", error);
+      toast.error("Failed to delete story. Please try again.");
+    } finally {
+      setOpenPopup(false);
+      setDeleteId(null);
+    }
+  };
 
   if (userStories.length === 0) {
     return (
@@ -113,22 +142,88 @@ function UserStory() {
                   <div className='text-xs sm:text-sm text-slate-500 font-medium'>
                     Click to read more ...
                   </div>
-                  <button
-                    disabled={true}
-                    className='p-2 sm:p-3 rounded-full bg-white/50 backdrop-blur-sm border border-white/30 active:scale-95 group/heart disabled:opacity-50 disabled:cursor-not-allowed'
-                  >
-                    <Heart
-                      className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-all duration-300 group-hover/heart:scale-110 fill-red-500 text-red-500 drop-shadow-lg
-                    `}
-                    />
-                    <p>{story.likes.length}</p>
-                  </button>
+                  <div className='flex items-center gap-2 sm:gap-3'>
+                    {/* Edit Button */}
+                    <button
+                      onClick={() => {
+                        setEditingStory(story);
+                        setOpenUpload(true);
+                      }}
+                      className='p-2 sm:p-3 rounded-full bg-blue-500/20'
+                      title='Edit Story'
+                    >
+                      <Edit className='w-4 h-4' />
+                    </button>
+
+                    {/* Delete Button */}
+                    <button
+                      onClick={() => {
+                        setDeleteId(story._id);
+                        setOpenPopup(true);
+                      }}
+                      className='p-2 sm:p-3 rounded-full bg-red-500/20 backdrop-blur-sm border border-red-300/30 hover:bg-red-500/30 active:scale-95 transition-all duration-200 group/delete'
+                      title='Delete Story'
+                    >
+                      <Trash2 className='w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-red-600 transition-all duration-300 group-hover/delete:scale-110' />
+                    </button>
+
+                    {/* Like Button */}
+                    <button
+                      disabled={true}
+                      className='p-2 sm:p-3 rounded-full bg-white/50 backdrop-blur-sm border border-white/30 active:scale-95 group/heart disabled:opacity-50 disabled:cursor-not-allowed'
+                    >
+                      <Heart
+                        className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-all duration-300 group-hover/heart:scale-110 fill-red-500 text-red-500 drop-shadow-lg`}
+                      />
+                      <p className='text-xs sm:text-sm text-slate-600 mt-1'>
+                        {story.likes.length}
+                      </p>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         ))}
       </div>
+      <button
+        onClick={() => {
+          setEditingStory(null);
+          setOpenUpload(true);
+        }}
+        className='fixed bottom-6 right-6 p-4 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition'
+      >
+        <Plus className='w-6 h-6' />
+      </button>
+
+      <ConfirmDelete
+        open={openPopup}
+        onClose={() => setOpenPopup(false)}
+        onConfirm={handeldelete}
+        storyId={deleteId}
+      />
+
+      {openUpload && (
+        <div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4'>
+          <div className='bg-white rounded-xl shadow-lg w-full max-w-2xl h-auto max-h-[90vh] overflow-y-auto relative p-4 sm:p-6'>
+            <button
+              onClick={() => setOpenUpload(false)}
+              className='absolute top-3 right-3 text-gray-500 hover:text-gray-700'
+            >
+              ✕
+            </button>
+
+            <TravelUploadComponent
+              editData={editingStory}
+              onUploadSuccess={() => {
+                setOpenUpload(false);
+                fetchUserStories();
+              }}
+              onClose={() => setOpenUpload(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

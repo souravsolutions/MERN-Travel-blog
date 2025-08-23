@@ -34,10 +34,10 @@ function Navbar() {
               <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300 group-hover:w-full'></span>
             </Link>
             <Link
-              to='/explore'
+              to='/uploadstory'
               className='relative text-slate-600 hover:text-blue-600 font-medium transition-all duration-300 group'
             >
-              Explore
+              Upload-Story
               <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300 group-hover:w-full'></span>
             </Link>
           </div>
@@ -113,10 +113,10 @@ function Navbar() {
               My Stories
             </Link>
             <Link
-              to='/explore'
+              to='/uploadstory'
               className='block px-4 py-3 text-slate-600 hover:text-blue-600 hover:bg-blue-50/80 rounded-xl font-medium transition-all duration-200 border border-transparent hover:border-blue-100'
             >
-              Explore
+              Upload-Story
             </Link>
           </div>
 

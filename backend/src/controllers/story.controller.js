@@ -1,12 +1,17 @@
 import { TravelStory } from "../models/travelStory.model.js";
+import { cloudinary } from "../utils/cloudnary-conig.js";
 
 const addStory = async (req, res) => {
   try {
     const { title, story, visitedLocation, visitedDate, isFevourite, tags } =
       req.body;
 
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
     const userId = req.user.id;
-    const imageUrl = req.file.path;
+    const imageUrl = req.file ? req.file.path : null;
+    const imagePublicId = req.file ? req.file.filename : null;
 
     if (!title || !story || !visitedDate) {
       return res.status(400).json({
@@ -21,9 +26,10 @@ const addStory = async (req, res) => {
       visitedLocation,
       visitedDate,
       imageUrl,
+      imagePublicId,
       isFevourite,
       userId,
-      tags,
+      tags: tags ? JSON.parse(tags) : [],
       likes: [],
     });
 
@@ -48,8 +54,8 @@ const allstory = async (req, res) => {
       .sort({ createdAt: -1 });
 
     if (!stories || stories.length === 0) {
-      return res.status(404).json({
-        success: false,
+      return res.status(200).json({
+        success: true,
         message: "No travel stories found for this user.",
       });
     }
@@ -161,16 +167,18 @@ const userStory = async (req, res) => {
   }
 };
 
-export const deleteStory = async (req, res) => {
+const deleteStory = async (req, res) => {
   try {
     const story = await TravelStory.findById(req.params.id);
+    console.log(story);
 
     if (!story) {
       return res.status(404).json({ message: "Story not found" });
     }
 
     if (story.imagePublicId) {
-      await cloudinary.uploader.destroy(story.imagePublicId);
+      const result = await cloudinary.uploader.destroy(story.imagePublicId);
+      console.log("Cloudinary delete result:", result);
     }
 
     await story.deleteOne();
@@ -182,4 +190,58 @@ export const deleteStory = async (req, res) => {
   }
 };
 
-export { addStory, allstory, getSingleStory, likeStory, userStory, deleteStory };
+const editStory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, story, visitedLocation, visitedDate, isFevourite, tags } =
+      req.body;
+
+    const existingStory = await TravelStory.findById(id);
+    if (!existingStory) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Story not found" });
+    }
+
+    if (req.file) {
+      if (existingStory.imagePublicId) {
+        await cloudinary.uploader.destroy(existingStory.imagePublicId);
+      }
+
+      existingStory.imageUrl = req.file.path;
+      existingStory.imagePublicId = req.file.filename;
+    }
+
+    existingStory.title = title;
+    existingStory.story = story;
+    existingStory.visitedLocation = visitedLocation;
+    existingStory.visitedDate = visitedDate;
+    existingStory.isFevourite = isFevourite;
+    existingStory.tags = JSON.parse(tags);
+
+    await existingStory.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Story updated successfully",
+      data: existingStory,
+    });
+  } catch (error) {
+    console.error("Error updating story:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while updating the story",
+      error: error.message,
+    });
+  }
+};
+
+export {
+  addStory,
+  allstory,
+  getSingleStory,
+  likeStory,
+  userStory,
+  deleteStory,
+  editStory,
+};

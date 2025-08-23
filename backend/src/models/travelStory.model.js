@@ -29,6 +29,9 @@ const travelStorySchema = new Schema(
     imageUrl: {
       type: String,
     },
+    imagePublicId: {
+      type: String,
+    },
     visitedDate: {
       type: Date,
       required: true,

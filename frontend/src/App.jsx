@@ -8,6 +8,7 @@ import SingelStory from "./components/SingelStory";
 import useAuthStore from "./context/AuthContext";
 import UserStory from "./components/UserStory";
 import { Toaster } from "sonner";
+import TravelUploadComponent from "./components/TravelUploadComponent";
 
 function App() {
   const { fetchUser, user } = useAuthStore();
@@ -28,6 +29,7 @@ function App() {
           <Route path='/dashboard' element={<Home />} />
           <Route path='/dashboard/:id' element={<SingelStory />} />
           <Route path='/YourStory' element={<UserStory />} />
+          <Route path="/uploadstory" element={<TravelUploadComponent />} />
         </Routes>
         <Toaster richColors position='top-right' />
       </Router>
