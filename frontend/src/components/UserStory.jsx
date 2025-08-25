@@ -149,10 +149,10 @@ function UserStory() {
                         setEditingStory(story);
                         setOpenUpload(true);
                       }}
-                      className='p-2 sm:p-3 rounded-full bg-blue-500/20'
+                      className='p-3 sm:p-3 rounded-full bg-blue-500/20'
                       title='Edit Story'
                     >
-                      <Edit className='w-4 h-4' />
+                      <Edit className='w-6 h-6' />
                     </button>
 
                     {/* Delete Button */}
