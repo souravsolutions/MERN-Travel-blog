@@ -13,8 +13,8 @@ function Navbar() {
   const navItems = [
     { name: "Home", path: "/dashboard" },
     { name: "My Stories", path: "/YourStory" },
-    { name: "Upload", path: "/uploadstory" },
-    { name: "About", path: "/about" },
+    { name: "Liked Story", path: "/LikedStory" },
+    { name: "Trending", path: "/trending" },
   ];
 
   const isActiveRoute = (path) => {

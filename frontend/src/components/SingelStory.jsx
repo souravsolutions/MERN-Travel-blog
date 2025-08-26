@@ -4,6 +4,7 @@ import useAuthStore from "../context/AuthContext";
 import { Heart } from "lucide-react";
 import { ArrowLeft, Calendar, User, Clock, Share2 } from "lucide-react";
 import debounce from "lodash/debounce";
+import Loading from "./Loading";
 
 function SingleStory() {
   const { id } = useParams();
@@ -37,12 +38,7 @@ function SingleStory() {
 
   if (!story) {
     return (
-      <div className='flex items-center justify-center h-screen bg-gray-100'>
-        <div className='flex flex-col items-center'>
-          <div className='w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin'></div>
-          <p className='mt-4 text-lg font-medium text-gray-700'>Loading...</p>
-        </div>
-      </div>
+      <Loading/>
     );
   }
 
@@ -52,7 +48,7 @@ function SingleStory() {
         <img
           src={story.imageUrl}
           alt={story.title}
-          className='w-full h-96 object-cover'
+          className='w-full h-64 sm:h-80 md:h-[500px] lg:h-[600px] object-cover'
         />
         <div className='absolute inset-0 bg-black opacity-70 flex items-end'>
           <div className='container mx-auto px-4 py-8'>
@@ -118,7 +114,8 @@ function SingleStory() {
                 <p>{story.likes.length}</p>
               </button>
 
-              <button className='flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-colors'>
+              <button
+               className='flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-colors'>
                 <Share2 size={16} />
                 <span>Share</span>
               </button>
