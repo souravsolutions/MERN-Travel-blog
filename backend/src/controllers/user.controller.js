@@ -3,12 +3,14 @@ import { User } from "../models/user.model.js";
 const refreshTokenOptions = {
   httpOnly: true,
   secure: true,
+  sameSite: "None",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 const accessTokenOptions = {
   httpOnly: true,
   secure: true,
+  sameSite: "None",
   maxAge: 15 * 60 * 1000,
 };
 
