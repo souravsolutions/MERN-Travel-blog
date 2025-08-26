@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuthStore from "../context/AuthContext";
 import Navbar from "./Navbar";
 import { BookOpen } from "lucide-react";
-import { Heart, Edit, Trash2, Plus } from "lucide-react";
+import { Heart, Edit, Trash2, Plus, X } from "lucide-react";
 import Loading from "./Loading";
 import ApiClient from "../service/apiClient";
 import { toast } from "sonner";
@@ -51,6 +51,38 @@ function UserStory() {
       <div className='min-h-screen bg-gradient-to-br from-slate-50 to-blue-50'>
         <Navbar />
 
+        <button
+          onClick={() => {
+            setEditingStory(null);
+            setOpenUpload(true);
+          }}
+          className='fixed bottom-6 right-6 p-4 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition'
+        >
+          <Plus className='w-6 h-6' />
+        </button>
+
+        {openUpload && (
+          <div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4'>
+            <div className='bg-white rounded-xl shadow-lg w-full max-w-2xl h-auto max-h-[90vh] overflow-y-auto relative p-4 sm:p-6'>
+              <button
+                onClick={() => setOpenUpload(false)}
+                className='absolute top-3 right-3 text-gray-500 hover:text-gray-700'
+              >
+                ✕
+              </button>
+
+              <TravelUploadComponent
+                editData={editingStory}
+                onUploadSuccess={() => {
+                  setOpenUpload(false);
+                  fetchUserStories();
+                }}
+                onClose={() => setOpenUpload(false)}
+              />
+            </div>
+          </div>
+        )}
+
         <div className='flex flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8'>
           <div className='w-full max-w-md text-center'>
             <div className='mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-blue-100 mb-8'>
@@ -80,11 +112,11 @@ function UserStory() {
   return (
     <div>
       <Navbar />
-      <div className='max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8 '>
+      <div className='max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 sm:py-10 py-8'>
         {userStories.map((story) => (
           <div
             key={story._id}
-            className='bg-white/80 backdrop-blur-lg shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 mb-6 sm:mb-8 overflow-hidden group'
+            className='bg-white backdrop-blur-lg shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 mb-6 sm:mb-8 overflow-hidden group'
           >
             <div className='flex flex-col md:flex-row'>
               <div className='relative md:w-2/5 lg:w-2/5 aspect-[4/3] overflow-hidden'>
@@ -95,7 +127,7 @@ function UserStory() {
                 />
                 <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
                 <div className='absolute top-3 left-3 sm:top-5 sm:left-5'>
-                  <span className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r text-xs sm:text-sm font-semibold text-gray-400 rounded-full shadow-lg backdrop-blur-sm border border-white/20'>
+                  <span className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r from-gray-200 to-white-500 text-xs sm:text-sm font-semibold text-black rounded-full shadow-lg'>
                     Travel
                   </span>
                 </div>
@@ -205,12 +237,14 @@ function UserStory() {
 
       {openUpload && (
         <div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4'>
-          <div className='bg-white rounded-xl shadow-lg w-full max-w-2xl h-auto max-h-[90vh] overflow-y-auto relative p-4 sm:p-6'>
+          <div className='bg-white rounded-xl shadow-lg w-full max-w-2xl h-auto max-h-[90vh] overflow-y-auto scrollbar-hide relative p-4 sm:p-6'>
             <button
               onClick={() => setOpenUpload(false)}
-              className='absolute top-3 right-3 text-gray-500 hover:text-gray-700'
+              className='absolute top-3 right-3 text-white hover:text-gray-200 bg-gray-400 rounded-full p-1 hover:bg-red-500 transition-colors duration-300 cursor-pointer'
             >
-              ✕
+              <X
+              className="size-5" 
+              />
             </button>
 
             <TravelUploadComponent

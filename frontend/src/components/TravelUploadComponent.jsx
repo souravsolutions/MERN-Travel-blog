@@ -130,8 +130,8 @@ export default function TravelUploadComponent({
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-100 p-4'>
-      <div className='w-full max-w-2xl bg-white rounded-lg shadow-lg p-4 sm:p-6'>
+    <div className='min-h-screen flex items-center justify-center p-4'>
+      <div className='w-full max-w-2xl bg-white rounded-lg p-4 sm:p-6'>
         <h2 className='text-xl sm:text-2xl font-bold text-gray-800 mb-6 text-center'>
           {editData ? "Edit Travel Memory" : "Share Your Travel Memory"}
         </h2>

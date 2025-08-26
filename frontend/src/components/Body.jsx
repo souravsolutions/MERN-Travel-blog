@@ -35,7 +35,7 @@ function Body() {
               />
               <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
               <div className='absolute top-3 left-3 sm:top-5 sm:left-5'>
-                <span className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r text-xs sm:text-sm font-semibold text-gray-400 rounded-full shadow-lg backdrop-blur-sm border border-white/20'>
+                <span className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r from-gray-200 to-white-500 text-xs sm:text-sm font-semibold text-black rounded-full shadow-lg'>
                   Travel
                 </span>
               </div>

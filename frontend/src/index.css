@@ -5,3 +5,18 @@
     --font-display: "Arimo", "sans-serif";
     --font-display2: "Rubik", "sans-serif";
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer {
+  body {
+    @apply bg-[#f2f9ff]
+  }
+}
