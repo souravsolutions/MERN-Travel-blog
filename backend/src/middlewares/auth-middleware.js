@@ -7,15 +7,15 @@ export const authMiddleware = async (req, res, next) => {
 
   const accessTokenOptions = {
     httpOnly: true,
-    secure: false,
-    sameSite: "Lax",
+    secure: true,
+    sameSite: "None",
     expires: new Date(Date.now() + 5 * 60 * 1000),
   };
 
   const refreshTokenOptions = {
     httpOnly: true,
-    secure: false,
-    sameSite: "Lax",
+    secure: true,
+    sameSite: "None",
     expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
   };
 
