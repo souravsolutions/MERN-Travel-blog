@@ -3,12 +3,11 @@ import { useEffect, useRef } from "react";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
-import Front from "./pages/front";
+import Front from "./pages/Front";
 import SingelStory from "./components/SingelStory";
 import useAuthStore from "./context/AuthContext";
 import UserStory from "./components/UserStory";
 import { Toaster } from "sonner";
-import TravelUploadComponent from "./components/TravelUploadComponent";
 import ComingSoon from "./pages/coming/ComingSoon";
 
 function App() {
