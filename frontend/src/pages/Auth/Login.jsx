@@ -13,10 +13,14 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const fetchUser = useAuthStore((state) => state.fetchUser);
+
   const loginHandeler = async (e) => {
     e.preventDefault();
     try {
       const res = await ApiClient.login(email, password);
+
+      await fetchUser();
       
       navigate("/dashboard");
       toast.success("Login successful!");
