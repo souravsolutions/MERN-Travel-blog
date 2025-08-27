@@ -17,7 +17,7 @@ function App() {
     if (!user) {
       fetchUser();
     }
-  },[]);
+  },[user]);
 
   return (
     <>

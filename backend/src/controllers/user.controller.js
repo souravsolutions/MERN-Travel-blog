@@ -1,18 +1,5 @@
 import { User } from "../models/user.model.js";
-
-const refreshTokenOptions = {
-  httpOnly: true,
-  secure: true,
-  sameSite: "None",
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-};
-
-const accessTokenOptions = {
-  httpOnly: true,
-  secure: true,
-  sameSite: "None",
-  maxAge: 15 * 60 * 1000,
-};
+import { accessTokenOptions, refreshTokenOptions } from "../utils/jwt-options.js";
 
 const signUp = async (req, res) => {
   try {
@@ -117,7 +104,9 @@ const getUser = async (req, res) => {
   try {
     const { id } = req.user;
 
-    const user = await User.findOne({ _id: id }).select("-password -__v -refreshToken");
+    const user = await User.findOne({ _id: id }).select(
+      "-password -__v -refreshToken"
+    );
 
     if (!user) {
       return res.status(404).json({
@@ -144,4 +133,4 @@ const getUser = async (req, res) => {
   }
 };
 
-export { signUp, loginUser, getUser};
+export { signUp, loginUser, getUser };

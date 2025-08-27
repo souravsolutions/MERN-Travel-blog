@@ -14,22 +14,17 @@ function SignUp() {
   const [fullName, setFullName] = useState("");
   const navigate = useNavigate();
 
-  const signup = useAuthStore((state) => state.login);
-  const allStory = useAuthStore((state) => state.allStory);
+  const fetchUser = useAuthStore((state) => state.fetchUser);
 
   const signuphandaler = async (e) => {
     e.preventDefault();
     try {
       const res = await ApiClient.signUp(fullName, email, password);
-      const user = res.data.user;
-      signup(user);
-
-      const storiesRes = await ApiClient.getUserStories();
-      allStory(storiesRes.data.data);
+  
+      await fetchUser();
 
       navigate("/dashboard");
-      window.location.reload();
-      toast.success("welcome to Travel Blogger!")
+      toast.success("welcome to Travel Blogger!");
     } catch (err) {
       console.error("Login error:", err);
       toast.error("Signup failed. Please check your details.");

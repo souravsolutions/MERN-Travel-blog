@@ -87,16 +87,22 @@ function Body() {
                 <button
                   onClick={() => handleFavourite(story._id)}
                   disabled={updating === story._id}
-                  className='p-2 sm:p-3 rounded-full bg-white/50 backdrop-blur-sm border border-white/30 active:scale-95 group/heart disabled:opacity-50 disabled:cursor-not-allowed'
+                  className='px-4 py-2 rounded-full bg-gradient-to-r to-blue-200
+             backdrop-blur-md border border-black/20 shadow-md 
+             active:scale-95 group/heart disabled:opacity-50 disabled:cursor-not-allowed 
+             flex justify-center items-center gap-2 sm:gap-3 transition-all duration-300
+             hover:shadow-lg hover:shadow-red-300/50'
                 >
                   <Heart
-                    className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-all duration-300 group-hover/heart:scale-110 ${
+                    className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-transform duration-300 group-hover/heart:scale-125 ${
                       story.likes.includes(user._id)
                         ? "fill-red-500 text-red-500 drop-shadow-lg"
                         : "fill-white text-white stroke-slate-800 stroke-2"
                     }`}
                   />
-                  <p>{story.likes.length}</p>
+                  <p className='text-sm sm:text-base font-semibold text-slate-700'>
+                    {story.likes.length}
+                  </p>
                 </button>
               </div>
             </div>
