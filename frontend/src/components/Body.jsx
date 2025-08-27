@@ -30,7 +30,11 @@ function Body() {
             <div className='relative md:w-2/5 lg:w-2/5 aspect-[4/3] overflow-hidden'>
               <img
                 src={story.imageUrl}
+                srcSet={`${story.imageUrl}?w=640 640w, ${story.imageUrl}?w=960 960w, ${story.imageUrl}?w=1280 1280w`}
                 alt={story.title}
+                width={1280}
+                height={960}
+                loading='eager'
                 className='absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out'
               />
               <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>

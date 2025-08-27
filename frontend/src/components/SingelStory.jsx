@@ -14,7 +14,7 @@ function SingleStory() {
 
   useEffect(() => {
     fetchStoryById(id);
-  }, [id,user]);
+  }, [id, user]);
 
   const debouncedFavourite = useCallback(
     debounce(async (storyId) => {
@@ -37,9 +37,7 @@ function SingleStory() {
   const story = currentStory;
 
   if (!story) {
-    return (
-      <Loading/>
-    );
+    return <Loading />;
   }
 
   return (
@@ -47,7 +45,11 @@ function SingleStory() {
       <div className='relative'>
         <img
           src={story.imageUrl}
+          srcSet={`${story.imageUrl}?w=640 640w, ${story.imageUrl}?w=960 960w, ${story.imageUrl}?w=1280 1280w`}
           alt={story.title}
+          width={1280}
+          height={960}
+          loading='eager'
           className='w-full h-64 sm:h-80 md:h-[500px] lg:h-[600px] object-cover'
         />
         <div className='absolute inset-0 bg-black opacity-70 flex items-end'>
@@ -114,8 +116,7 @@ function SingleStory() {
                 <p>{story.likes.length}</p>
               </button>
 
-              <button
-               className='flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-colors'>
+              <button className='flex items-center space-x-2 px-4 py-2 rounded-full border border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-colors'>
                 <Share2 size={16} />
                 <span>Share</span>
               </button>
