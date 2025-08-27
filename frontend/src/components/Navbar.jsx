@@ -72,7 +72,7 @@ function Navbar() {
                                rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl
                                shadow-md flex-shrink-0 bg-slate-900'
                   >
-                    {user.fullName.charAt(0).toUpperCase()}
+                    {user?.fullName?.charAt(0).toUpperCase() || "U"}
                   </div>
                   <span className='text-slate-700 font-medium text-sm'>
                     {user.fullName}
@@ -172,7 +172,7 @@ function Navbar() {
                                rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl
                                shadow-md flex-shrink-0 bg-slate-900'
                   >
-                    {user.fullName.charAt(0).toUpperCase()}
+                    {user?.fullName?.charAt(0).toUpperCase() || "U"}
                   </div>
                   <div>
                     <span className='block text-slate-800 font-medium'>
