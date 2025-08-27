@@ -37,7 +37,6 @@ function Navbar() {
             </span>
           </div>
 
-          {/* Desktop Navigation - Pill Style */}
           <div className='hidden lg:flex items-center'>
             <div className='bg-slate-100/80 backdrop-blur-sm rounded-full p-1.5 border border-slate-200/60 shadow-sm'>
               <div className='flex items-center space-x-1'>
@@ -61,7 +60,6 @@ function Navbar() {
             </div>
           </div>
 
-          {/* Desktop User Section */}
           <div className='hidden lg:flex items-center gap-4'>
             {user ? (
               <div className='relative'>
@@ -69,22 +67,29 @@ function Navbar() {
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className='flex items-center gap-3 bg-slate-50/90 hover:bg-slate-100/90 rounded-full px-4 py-2.5 border border-slate-200/60 transition-all duration-200 group'
                 >
-                  <img
-                    src={user.avatar || "/pfp.jpeg"}
-                    alt='User Avatar'
-                    className='h-8 w-8 rounded-full border-2 border-white shadow-sm'
-                  />
+                  <div
+                    className='w-12 h-12 sm:w-9 sm:h-9 bg-gradient-to-br
+                               rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl
+                               shadow-md flex-shrink-0 bg-slate-900'
+                  >
+                    {user.fullName.charAt(0).toUpperCase()}
+                  </div>
                   <span className='text-slate-700 font-medium text-sm'>
                     {user.fullName}
                   </span>
-                  <FaChevronDown className={`text-slate-500 text-xs transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  <FaChevronDown
+                    className={`text-slate-500 text-xs transition-transform duration-200 ${
+                      isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
-                
-                {/* Dropdown Menu */}
+
                 {isDropdownOpen && (
                   <div className='absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl border border-slate-200/60 py-2 z-50'>
                     <div className='px-4 py-2 border-b border-slate-100'>
-                      <p className='text-sm font-medium text-slate-800'>{user.fullName}</p>
+                      <p className='text-sm font-medium text-slate-800'>
+                        {user.fullName}
+                      </p>
                       <p className='text-xs text-slate-500'>{user.email}</p>
                     </div>
                     <button
@@ -106,7 +111,6 @@ function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <div className='lg:hidden'>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -131,7 +135,6 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`lg:hidden bg-white/95 backdrop-blur-md border-t border-slate-200/50 transition-all duration-300 ease-out ${
           isOpen
@@ -164,11 +167,13 @@ function Navbar() {
             {user ? (
               <div className='space-y-3'>
                 <div className='flex items-center gap-3 px-4 py-3 bg-slate-50 rounded-lg'>
-                  <img
-                    src={user.avatar || "/pfp.jpeg"}
-                    alt='User Avatar'
-                    className='h-10 w-10 rounded-full border-2 border-white shadow-sm'
-                  />
+                  <div
+                    className='w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br
+                               rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl
+                               shadow-md flex-shrink-0 bg-slate-900'
+                  >
+                    {user.fullName.charAt(0).toUpperCase()}
+                  </div>
                   <div>
                     <span className='block text-slate-800 font-medium'>
                       {user.fullName}
@@ -195,11 +200,10 @@ function Navbar() {
           </div>
         </div>
       </div>
-      
-      {/* Click outside to close dropdown */}
+
       {isDropdownOpen && (
-        <div 
-          className='fixed inset-0 z-40' 
+        <div
+          className='fixed inset-0 z-40'
           onClick={() => setIsDropdownOpen(false)}
         />
       )}

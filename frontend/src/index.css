@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Comic+Relief:wght@400;700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -19,4 +19,11 @@
   body {
     @apply bg-[#f2f9ff]
   }
+}
+
+@theme {
+  --font-title: "JetBrains Mono", "monospace";
+  --font-titles: "Nunito", "sans-serif";
+  --font-head: "Archivo Black", "sans-serif";
+  --font-small: "Josefin Sans", "sans-serif";
 }
