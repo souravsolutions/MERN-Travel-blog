@@ -9,6 +9,9 @@ const useAuthStore = create((set) => ({
   userStories: [],
   hasFetched: false,
 
+  setUser: (user) => set({ user }),
+  setStories: (stories) => set({ stories }),
+
   fetchUser: async () => {
     try {
       const res = await ApiClient.getCurrentUser();

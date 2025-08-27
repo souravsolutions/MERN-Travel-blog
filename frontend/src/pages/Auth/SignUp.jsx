@@ -14,14 +14,19 @@ function SignUp() {
   const [fullName, setFullName] = useState("");
   const navigate = useNavigate();
 
-  const fetchUser = useAuthStore((state) => state.fetchUser);
+  const { setUser, setStories } = useAuthStore()
 
   const signuphandaler = async (e) => {
     e.preventDefault();
     try {
       const res = await ApiClient.signUp(fullName, email, password);
-  
-      await fetchUser();
+      console.log(res);
+      const user = res.data.user;
+      setUser(user);
+
+      const storiesRes = await ApiClient.getAllStories();
+      const allStory = storiesRes.data.data
+      setStories(allStory);
 
       navigate("/dashboard");
       toast.success("welcome to Travel Blogger!");

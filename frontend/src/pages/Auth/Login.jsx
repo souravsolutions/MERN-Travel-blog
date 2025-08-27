@@ -13,15 +13,19 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const fetchUser = useAuthStore((state) => state.fetchUser);
+  const { setUser, setStories } = useAuthStore()
 
   const loginHandeler = async (e) => {
     e.preventDefault();
     try {
       const res = await ApiClient.login(email, password);
+      const user = res.data.user;
+      setUser(user);
 
-      await fetchUser();
-      
+      const storiesRes = await ApiClient.getAllStories();
+      const allStory = storiesRes.data.data;
+      setStories(allStory);
+
       navigate("/dashboard");
       toast.success("Login successful!");
     } catch (err) {
