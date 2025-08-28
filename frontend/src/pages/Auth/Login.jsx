@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { FaFacebook, FaTwitter, FaInstagram, FaGoogle } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import ApiClient from "../../service/apiClient.js";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../context/AuthContext";
@@ -10,7 +13,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const { setUser, setStories } = useAuthStore();
 
   const loginHandeler = async (e) => {
@@ -20,6 +22,7 @@ function Login() {
       const res = await ApiClient.login(email, password);
       const user = res.data.user;
       setUser(user);
+      console.log(user);
 
       const storiesRes = await ApiClient.getAllStories();
       const allStory = storiesRes.data.data;
@@ -31,11 +34,9 @@ function Login() {
       console.error("Login error:", err);
       toast.error("Login failed. Please check your credentials.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
-
-  const isDisabled = !email || !password || loading;
 
   return (
     <div className='min-h-screen w-full flex items-center justify-center bg-[#F8F8FF] p-4'>
@@ -78,7 +79,6 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder='Email'
-                required
                 className='w-full px-4 py-2 rounded-full border-none outline-none bg-white/10 text-white placeholder-white/70 focus:bg-white/25 text-sm sm:text-base'
               />
 
@@ -87,7 +87,6 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password'
-                required
                 className='w-full px-4 py-2 rounded-full border-none outline-none bg-white/10 text-white placeholder-white/70 focus:bg-white/25 text-sm sm:text-base'
               />
 
@@ -103,11 +102,11 @@ function Login() {
               <button
                 type='submit'
                 onClick={loginHandeler}
-                disabled={isDisabled}
-                className={`w-full px-4 py-2 sm:py-3 rounded-full font-bold text-sm sm:text-base lg:text-lg shadow transition-colors ${
-                  isDisabled
-                    ? "bg-gray-300 text-gray-600 cursor-not-allowed"
-                    : "bg-white text-[#24427a] hover:bg-[#f2f7ff]"
+                disabled={loading}
+                className={`w-full px-4 py-2 sm:py-3 rounded-full bg-white text-[#24427a] font-bold text-sm sm:text-base lg:text-lg shadow transition-colors ${
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-[#f2f7ff]"
                 }`}
               >
                 {loading ? "Logging in..." : "ENTER"}
