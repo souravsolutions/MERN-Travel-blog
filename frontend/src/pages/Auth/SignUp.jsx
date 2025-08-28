@@ -82,6 +82,7 @@ function SignUp() {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder='Fullname'
+                required
                 className='w-full px-4 py-2 rounded-full border-none outline-none bg-white/10 text-white placeholder-white/70 focus:bg-white/25 text-sm sm:text-base'
               />
 
@@ -90,6 +91,7 @@ function SignUp() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder='Email'
+                required
                 className='w-full px-4 py-2 rounded-full border-none outline-none bg-white/10 text-white placeholder-white/70 focus:bg-white/25 text-sm sm:text-base'
               />
 
@@ -98,6 +100,7 @@ function SignUp() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password'
+                required
                 className='w-full px-4 py-2 rounded-full border-none outline-none bg-white/10 text-white placeholder-white/70 focus:bg-white/25 text-sm sm:text-base'
               />
 
