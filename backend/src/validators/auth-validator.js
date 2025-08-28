@@ -1,4 +1,4 @@
-import z from "zod"
+import z from "zod";
 
 export const registerUserSchema = z.object({
   fullName: z
@@ -6,8 +6,9 @@ export const registerUserSchema = z.object({
     .trim()
     .min(3, { message: "Name must be at least 3 characters." })
     .max(20, { message: "Name cannot be bigger than 20 characters." })
-    .regex(/^[a-zA-Z0-9_]+$/, {
-      message: "Username can only contain letters, numbers, and underscores."
+    .regex(/^[a-zA-Z0-9_ ]+$/, {
+      message:
+        "Name can only contain letters, numbers, underscores, and spaces.",
     }),
 
   email: z

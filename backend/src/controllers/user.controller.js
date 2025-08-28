@@ -41,7 +41,7 @@ const signUp = async (req, res) => {
       message: "User registered successfully",
       user: {
         _id: user._id,
-        username: user.username,
+        fullName: user.fullName,
         email: user.email,
       },
     });
@@ -88,7 +88,7 @@ const loginUser = async (req, res) => {
       message: "Login successful",
       user: {
         _id: user._id,
-        username: user.username,
+        fullName: user.fullName,
         email: user.email,
       },
       accessToken,

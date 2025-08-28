@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { FaFacebook } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaInstagram, FaGoogle } from "react-icons/fa";
 import ApiClient from "../../service/apiClient.js";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../context/AuthContext";
@@ -11,12 +8,14 @@ import { toast } from "sonner";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { setUser, setStories } = useAuthStore()
+  const { setUser, setStories } = useAuthStore();
 
   const loginHandeler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await ApiClient.login(email, password);
       const user = res.data.user;
@@ -31,8 +30,12 @@ function Login() {
     } catch (err) {
       console.error("Login error:", err);
       toast.error("Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false)
     }
   };
+
+  const isDisabled = !email || !password || loading;
 
   return (
     <div className='min-h-screen w-full flex items-center justify-center bg-[#F8F8FF] p-4'>
@@ -98,9 +101,14 @@ function Login() {
               <button
                 type='submit'
                 onClick={loginHandeler}
-                className='w-full px-4 py-2 sm:py-3 rounded-full bg-white text-[#24427a] font-bold text-sm sm:text-base lg:text-lg shadow hover:bg-[#f2f7ff] transition-colors'
+                disabled={isDisabled}
+                className={`w-full px-4 py-2 sm:py-3 rounded-full font-bold text-sm sm:text-base lg:text-lg shadow transition-colors ${
+                  isDisabled
+                    ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                    : "bg-white text-[#24427a] hover:bg-[#f2f7ff]"
+                }`}
               >
-                ENTER
+                {loading ? "Logging in..." : "ENTER"}
               </button>
             </form>
           </div>

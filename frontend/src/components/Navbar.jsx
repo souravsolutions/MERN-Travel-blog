@@ -26,13 +26,14 @@ function Navbar() {
     setIsDropdownOpen(false);
   };
 
+
   return (
     <nav className='bg-white/95 backdrop-blur-xl border-b border-slate-200/60 sticky top-0 z-50 shadow-sm'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center gap-3 flex-shrink-0'>
             <img src='/logo-t.png' alt='Logo' className='h-10 w-auto sm:h-11' />
-            <span className='text-lg sm:text-xl font-bold bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 bg-clip-text text-transparent tracking-tight'>
+            <span className='text-lg sm:text-xl bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 bg-clip-text text-transparent tracking-tight font-head'>
               StoryApp
             </span>
           </div>

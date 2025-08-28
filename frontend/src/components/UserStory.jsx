@@ -112,7 +112,7 @@ function UserStory() {
   return (
     <div>
       <Navbar />
-      <div className='max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 sm:py-10 py-8'>
+      <div className='max-w-7xl mx-auto px-3 sm:px-5 lg:px-10 sm:py-15 py-8'>
         {userStories.map((story) => (
           <div
             key={story._id}
@@ -127,7 +127,7 @@ function UserStory() {
                 />
                 <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
                 <div className='absolute top-3 left-3 sm:top-5 sm:left-5'>
-                  <span className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r from-gray-200 to-white-500 text-xs sm:text-sm font-semibold text-black rounded-full shadow-lg'>
+                  <span className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r from-gray-200 to-white-500 text-xs sm:text-sm font-semibold text-black rounded-full shadow-lg font-head'>
                     Travel
                   </span>
                 </div>
@@ -142,7 +142,7 @@ function UserStory() {
                   </h2>
                   <div className='flex items-center mb-3 sm:mb-5'>
                     <div className='w-2 h-2 bg-gradient-to-r from-black to-white rounded-full mr-3'></div>
-                    <p className='text-slate-600 font-semibold text-sm sm:text-base lg:text-lg'>
+                    <p className='text-slate-600 font-semibold text-sm sm:text-base lg:text-lg font-title'>
                       By:{" "}
                       {story.userId?.fullName
                         ? story.userId.fullName.replace(/^"|"$/g, "")
@@ -161,7 +161,7 @@ function UserStory() {
                       {story.tags.map((tag, index) => (
                         <span
                           key={index}
-                          className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r from-slate-100 to-slate-200 text-xs sm:text-sm font-semibold text-slate-700 rounded-full shadow-md border border-slate-300/50 hover:shadow-lg hover:scale-105 transition-all duration-200'
+                          className='px-3 py-1 sm:px-4 sm:py-2 bg-gradient-to-r font-title from-slate-100 to-slate-200 text-xs sm:text-sm font-semibold text-slate-700 rounded-full shadow-md border border-slate-300/50 hover:shadow-lg hover:scale-105 transition-all duration-200'
                         >
                           {tag}
                         </span>
@@ -175,7 +175,6 @@ function UserStory() {
                     Click to read more ...
                   </div>
                   <div className='flex items-center gap-2 sm:gap-3'>
-                    {/* Edit Button */}
                     <button
                       onClick={() => {
                         setEditingStory(story);
@@ -187,7 +186,6 @@ function UserStory() {
                       <Edit className='w-6 h-6' />
                     </button>
 
-                    {/* Delete Button */}
                     <button
                       onClick={() => {
                         setDeleteId(story._id);
@@ -199,7 +197,6 @@ function UserStory() {
                       <Trash2 className='w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-red-600 transition-all duration-300 group-hover/delete:scale-110' />
                     </button>
 
-                    {/* Like Button */}
                     <button
                       disabled={true}
                       className='px-4 py-2 rounded-full bg-gradient-to-r to-blue-200

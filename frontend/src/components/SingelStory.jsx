@@ -91,7 +91,7 @@ function SingleStory() {
                 <div className='flex flex-wrap items-center gap-3 sm:gap-4 lg:gap-6 text-white/90 text-xs sm:text-sm'>
                   <div className='flex items-center bg-black/30 backdrop-blur-sm rounded-full px-2.5 py-1.5 sm:px-3 sm:py-2'>
                     <User size={14} className='mr-1.5 sm:mr-2 flex-shrink-0' />
-                    <span className='truncate max-w-[100px] sm:max-w-none'>{story.userId?.fullName}</span>
+                    <span className='truncate max-w-[100px] sm:max-w-none font-head'>{story.userId?.fullName}</span>
                   </div>
                   <div className='flex items-center bg-black/30 backdrop-blur-sm rounded-full px-2.5 py-1.5 sm:px-3 sm:py-2'>
                     <Calendar size={14} className='mr-1.5 sm:mr-2 flex-shrink-0' />
@@ -194,14 +194,7 @@ function SingleStory() {
                   </p>
                   
                   <div className='flex gap-2 mt-3'>
-                    <button className='text-xs sm:text-sm bg-blue-100 text-blue-700 px-3 py-1.5 
-                                     rounded-full hover:bg-blue-200 transition-colors'>
-                      Follow
-                    </button>
-                    <button className='text-xs sm:text-sm bg-gray-100 text-gray-700 px-3 py-1.5 
-                                     rounded-full hover:bg-gray-200 transition-colors'>
-                      Message
-                    </button>
+                    
                   </div>
                 </div>
               </div>
