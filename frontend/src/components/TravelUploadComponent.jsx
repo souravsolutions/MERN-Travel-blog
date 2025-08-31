@@ -137,7 +137,6 @@ export default function TravelUploadComponent({
         </h2>
 
         <form onSubmit={handleSubmit} className='space-y-6'>
-          {/* Image Upload */}
           <div className='space-y-4'>
             <label className='block text-sm font-medium text-gray-700'>
               Upload Image
@@ -188,7 +187,6 @@ export default function TravelUploadComponent({
             )}
           </div>
 
-          {/* Title */}
           <div>
             <label className='block text-sm font-medium text-gray-700 mb-2'>
               Title
@@ -203,7 +201,6 @@ export default function TravelUploadComponent({
             />
           </div>
 
-          {/* Story */}
           <div>
             <label className='block text-sm font-medium text-gray-700 mb-2'>
               Your Story
@@ -218,7 +215,6 @@ export default function TravelUploadComponent({
             />
           </div>
 
-          {/* Location */}
           <div>
             <label className='block text-sm font-medium text-gray-700 mb-2'>
               <MapPin className='inline h-4 w-4 mr-1' />
@@ -236,7 +232,6 @@ export default function TravelUploadComponent({
             />
           </div>
 
-          {/* Date */}
           <div>
             <label className='block text-sm font-medium text-gray-700 mb-2'>
               <Calendar className='inline h-4 w-4 mr-1' />
@@ -251,7 +246,6 @@ export default function TravelUploadComponent({
             />
           </div>
 
-          {/* Tags */}
           <div>
             <label className='block text-sm font-medium text-gray-700 mb-2'>
               <Tag className='inline h-4 w-4 mr-1' />
@@ -293,7 +287,6 @@ export default function TravelUploadComponent({
             </div>
           </div>
 
-          {/* Submit */}
           <button
             type='submit'
             disabled={isSubmitting}
